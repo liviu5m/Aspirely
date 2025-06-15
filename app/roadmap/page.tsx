@@ -43,7 +43,7 @@ const Roadmap = () => {
         {
           headers: {
             Authorization:
-              "Bearer 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",
+              "Bearer " + process.env.NEXT_PUBLIC_GROQ_KEY,
             "Content-Type": "application/json",
           },
         }
