@@ -15,6 +15,17 @@ model User {
   password      String?         
   emailVerified DateTime?
   image         String?
+  age           Int?
+  education     String?
+  city          String?
+  country       String?
+  personality   String? @db.VarChar(500)
+  interests     String? @db.VarChar(500)
+  skills        String? @db.VarChar(500)
+  experiences   String? @db.VarChar(500)
+  certificates  String? @db.VarChar(500)
+  careerPath    String?
+  roadmap       String? @db.VarChar(3000)
   accounts      Account[]
   sessions      Session[]
   Authenticator Authenticator[]

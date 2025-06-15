@@ -4,6 +4,8 @@ import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
+import "react-toastify/dist/ReactToastify.css";
+import { AppProvider } from "@/lib/AppContext";
 
 const font = Montserrat({
   variable: "--font-geist-sans",
@@ -22,11 +24,13 @@ export default async function RootLayout({
 }>) {
   return (
     <SessionProvider>
-      <html lang="en">
-        <body className={`${font.variable} antialiased  bg-[#202020] `}>
-          {children}
-        </body>
-      </html>
+      <AppProvider>
+        <html lang="en">
+          <body className={`${font.variable} antialiased  bg-[#202020] mt-20`}>
+            {children}
+          </body>
+        </html>
+      </AppProvider>
     </SessionProvider>
   );
 }

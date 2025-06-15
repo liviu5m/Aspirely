@@ -4,7 +4,6 @@ import bcrypt from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
-// Define Zod schema
 const RegisterSchema = z
   .object({
     name: z.string().min(1, "Name is required."),
@@ -21,7 +20,6 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
-    // Validate input using Zod
     const parsed = RegisterSchema.safeParse(body);
     if (!parsed.success) {
       const errorMessages = parsed.error.flatten().fieldErrors;
@@ -43,6 +41,77 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(user);
   } catch (err) {
+    return NextResponse.json({ error: err }, { status: 403 });
+  }
+}
+
+export async function PUT(request: NextRequest) {
+  try {
+    const {
+      name,
+      username,
+      age,
+      education,
+      city,
+      country,
+      personality,
+      interests,
+      skills,
+      experiences,
+      certificates,
+      id,
+      type,
+      career,
+      roadmap,
+    } = await request.json();
+
+    if (type == "careerPathUpdate") {
+      console.log(roadmap);
+      
+      const user = await prisma.user.update({
+        where: {
+          id,
+        },
+        data: {
+          careerPath: career,
+          roadmap,
+        },
+      });
+      return NextResponse.json(user);
+    } else if (type == "roadmap") {
+      const user = await prisma.user.update({
+        where: {
+          id,
+        },
+        data: {
+          roadmap,
+        },
+      });
+      return NextResponse.json(user);
+    } else {
+      const user = await prisma.user.update({
+        where: {
+          id,
+        },
+        data: {
+          name,
+          username,
+          age: Number(age),
+          education,
+          city,
+          country,
+          personality,
+          interests,
+          skills,
+          experiences,
+          certificates,
+        },
+      });
+      return NextResponse.json(user);
+    }
+  } catch (err) {
+    console.log(err);
+
     return NextResponse.json({ error: err }, { status: 403 });
   }
 }
