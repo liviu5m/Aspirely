@@ -56,9 +56,9 @@ const Path = () => {
       setLoading(true);
       axios
         .post(
-          "https://openrouter.ai/api/v1/chat/completions",
+          "https://api.groq.com/openai/v1/chat/completions",
           {
-            model: "deepseek/deepseek-r1-0528-qwen3-8b:free",
+            model: "llama3-70b-8192",
             messages: [
               {
                 role: "user",
@@ -126,8 +126,7 @@ DONT Write anything that is not necessary
           },
           {
             headers: {
-              Authorization:
-                "Bearer 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",
+              Authorization: "Bearer " + process.env.NEXT_PUBLIC_GROQ_KEY,
               "Content-Type": "application/json",
             },
           }

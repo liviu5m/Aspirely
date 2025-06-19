@@ -83,10 +83,6 @@ const Jobs = () => {
                 </thead>
                 <tbody className="text-gray-800">
                   {jobs.map((job) => {
-                    const salaryRange =
-                      job.salary_min && job.salary_max
-                        ? `£${job.salary_min.toLocaleString()} - £${job.salary_max.toLocaleString()}`
-                        : "Not disclosed";
 
                     const postedDate = new Date(job.created).toLocaleDateString(
                       undefined,
@@ -128,7 +124,7 @@ const Jobs = () => {
                           {contract}
                         </td>
                         <td className="p-3 font-semibold text-purple-700 text-sm min-w-[140px] whitespace-normal">
-                          {salaryRange}
+                          £{job.salary_max}
                         </td>
                         <td className="p-3 text-xs min-w-[120px] whitespace-normal">
                           {postedDate}

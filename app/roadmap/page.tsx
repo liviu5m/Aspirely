@@ -42,8 +42,7 @@ const Roadmap = () => {
         },
         {
           headers: {
-            Authorization:
-              "Bearer " + process.env.NEXT_PUBLIC_GROQ_KEY,
+            Authorization: "Bearer " + process.env.NEXT_PUBLIC_GROQ_KEY,
             "Content-Type": "application/json",
           },
         }
@@ -64,6 +63,8 @@ const Roadmap = () => {
           /"difficulty":\s*(\d+\/\d+)/g,
           `"difficulty": "$1"`
         );
+        console.log(jsonStr);
+
         try {
           let a = JSON.parse(jsonStr);
           setRoadmap(a);
@@ -78,8 +79,10 @@ const Roadmap = () => {
       });
   };
 
+  console.log(roadmap);
+
   useEffect(() => {
-    if (roadmap && user) {
+    if (roadmap.length > 0 && user) {
       axios
         .put("/api/user", {
           id: user.id,
@@ -88,7 +91,6 @@ const Roadmap = () => {
         })
         .then((res) => {
           console.log(res.data);
-          
         })
         .catch((err) => {
           console.log(err);
@@ -97,8 +99,13 @@ const Roadmap = () => {
   }, [roadmap]);
 
   useEffect(() => {
-    if (user && roadmap) {
-      setRoadmap(JSON.parse(user.roadmap));
+    if (user || roadmap.length != 0) {
+      try {
+        JSON.parse(user.roadmap);
+        setRoadmap(JSON.parse(user.roadmap));
+      } catch (err) {
+        // toast("Somethig")
+      }
     }
   }, [user]);
 

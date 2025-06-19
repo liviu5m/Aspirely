@@ -210,7 +210,8 @@ const Account = () => {
                     className="px-8 py-3 rounded-lg bg-green-600 cursor-pointer"
                     onClick={(e) => {
                       e.preventDefault();
-                      setInterests([...interests, currentInterest]);
+                      if (currentInterest.trim())
+                        setInterests([...interests, currentInterest]);
                       setCurrentInterest("");
                     }}
                   >
@@ -257,7 +258,8 @@ const Account = () => {
                     className="px-8 py-3 rounded-lg bg-green-600 cursor-pointer"
                     onClick={(e) => {
                       e.preventDefault();
-                      setSkills([...skills, currentSkill]);
+                      if (currentSkill.trim())
+                        setSkills([...skills, currentSkill]);
                       setCurrentSkill("");
                     }}
                   >
@@ -302,7 +304,8 @@ const Account = () => {
                     className="px-8 py-3 rounded-lg bg-green-600 cursor-pointer"
                     onClick={(e) => {
                       e.preventDefault();
-                      setExperiences([...experiences, currentExperience]);
+                      if (currentExperience.trim())
+                        setExperiences([...experiences, currentExperience]);
                       setCurrentExperience("");
                     }}
                   >
@@ -369,7 +372,11 @@ const Account = () => {
                     className="px-8 py-3 rounded-lg bg-green-600 cursor-pointer"
                     onClick={(e) => {
                       e.preventDefault();
-                      setCertificates([...certificates, currentCertificate]);
+                      if (
+                        currentCertificate.name.trim() &&
+                        currentCertificate.year.trim()
+                      )
+                        setCertificates([...certificates, currentCertificate]);
                       setCurrentCertificate({
                         name: "",
                         year: "undefined",

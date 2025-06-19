@@ -30,14 +30,14 @@ const Sidebar = () => {
             Roadmap
           </Link>
           <Link
-            href={"/courses"}
+            href={"/tips"}
             className={`${
-              pathname == "/courses"
+              pathname == "/tips"
                 ? "text-blue-500 bg-white scale-105 shadow-lg shadow-blue-500"
                 : "bg-blue-400 hover:scale-105 hover:shadow-md hover:shadow-blue-500"
             } px-5 py-3 rounded-lg cursor-pointer font-semibold`}
           >
-            Courses & Certifications
+            Tips
           </Link>
           <Link
             href={"/jobs"}
